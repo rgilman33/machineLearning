@@ -9,6 +9,12 @@ sudo pip install cython
 sudo apt-get install libhdf5-dev
 sudo pip install h5py
 
+sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+
+sudo pip install lmdb
+sudo apt-get install libopencv-dev python-opencv
+
 """
 # Plot ad hoc CIFAR10 instances
 from keras.datasets import cifar10
@@ -73,7 +79,7 @@ model.fit(X_train, y_train, validation_data=(X_test, y_test), nb_epoch=epochs, b
 scores = model.evaluate(X_test, y_test, verbose=0)
 print("Accuracy: %.2f%%" % (scores[1]*100))
 
-model.save('cifar10_model.h5')  # creates a HDF5 file 'my_model.h5'
+#model.save('cifar10_model.h5')  # creates a HDF5 file 'my_model.h5'
 del model  # deletes the existing model
 
 # returns a compiled model
