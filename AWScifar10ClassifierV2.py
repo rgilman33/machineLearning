@@ -39,34 +39,29 @@ num_classes = y_test.shape[1]
 epochs = 250
 lrate = 0.01
 decay = lrate/epochs
+POOL_SIZE = 2
 
 model = Sequential()
 model.add(Convolution2D(32, 3, 3, input_shape=(3, 32, 32), activation='relu', border_mode='same'))
 model.add(Dropout(0.2))
 
 model.add(Convolution2D(32, 3, 3, activation='relu', border_mode='same'))
-model.add(MaxPooling2D(pool_size=(3, 3)))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Convolution2D(32, 3, 3, activation='relu', border_mode='same'))
 model.add(Dropout(0.2))
 
 model.add(Convolution2D(32, 3, 3, activation='relu', border_mode='same'))
-model.add(MaxPooling2D(pool_size=(3, 3)))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Convolution2D(64, 3, 3, activation='relu', border_mode='same'))
 model.add(Dropout(0.2))
 
 model.add(Convolution2D(64, 3, 3, activation='relu', border_mode='same'))
-model.add(MaxPooling2D(pool_size=(3, 3)))
-model.add(Convolution2D(64, 3, 3, activation='relu', border_mode='same'))
-model.add(Dropout(0.2))
-
-model.add(Convolution2D(64, 3, 3, activation='relu', border_mode='same'))
-model.add(MaxPooling2D(pool_size=(3, 3)))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Convolution2D(128, 3, 3, activation='relu', border_mode='same'))
 model.add(Dropout(0.2))
-
 model.add(Convolution2D(128, 3, 3, activation='relu', border_mode='same'))
-model.add(MaxPooling2D(pool_size=(3, 3)))
-model.add(Flatten(input_shape=(128, 0, 0)))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Flatten())
 model.add(Dropout(0.2))
 model.add(Dense(1024, activation='relu', W_constraint=maxnorm(3)))
 model.add(Dropout(0.2))
