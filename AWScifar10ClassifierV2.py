@@ -49,9 +49,17 @@ num_classes = y_test.shape[1]
 
 model = Sequential()
 model.add(Convolution2D(32, 3, 3, input_shape=(3, 32, 32), activation='relu', border_mode='same'))
-model.add(Dropout(0.2))
-model.add(Convolution2D(32, 3, 3, activation='relu', border_mode='same'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
+#model.add(Dropout(0.2))
+model.add(Convolution2D(96, 3, 3, activation='relu', border_mode='same'))
+model.add(Convolution2D(96, 3, 3, activation='relu', border_mode='same'))
+model.add(MaxPooling2D(pool_size=(3, 3)))
+model.add(Convolution2D(192, 3, 3, activation='relu', border_mode='same'))
+model.add(Convolution2D(192, 3, 3, activation='relu', border_mode='same'))
+model.add(MaxPooling2D(pool_size=(3, 3)))
+model.add(Convolution2D(192, 3, 3, activation='relu', border_mode='same'))
+model.add(Convolution2D(192, 1, 1, activation='relu', border_mode='same'))
+model.add(Convolution2D(10, 1, 1, activation='relu', border_mode='same'))
+"""
 model.add(Convolution2D(64, 3, 3, activation='relu', border_mode='same'))
 model.add(Dropout(0.2))
 model.add(Convolution2D(64, 3, 3, activation='relu', border_mode='same'))
@@ -66,6 +74,7 @@ model.add(Dense(1024, activation='relu', W_constraint=maxnorm(3)))
 model.add(Dropout(0.2))
 model.add(Dense(512, activation='relu', W_constraint=maxnorm(3)))
 model.add(Dropout(0.2))
+"""
 model.add(Dense(num_classes, activation='softmax'))
 # Compile model
 epochs = 250
@@ -82,7 +91,7 @@ model.fit(X_train, y_train, validation_data=(X_test, y_test), nb_epoch=epochs, b
 scores = model.evaluate(X_test, y_test, verbose=0)
 print("Accuracy: %.2f%%" % (scores[1]*100))
 
-model.save('cifar10_model.h5')  # creates a HDF5 file 'my_model.h5'
+model.save('cifar10_modelV2.h5')  # creates a HDF5 file 'my_model.h5'
 del model  # deletes the existing model
 
 # returns a compiled model
