@@ -1,7 +1,9 @@
-# before this file is run, become root user, cd into directory, following command must be entered:
+#!/bin/bash
+
+#before this file is run, become root user, cd into directory, following command must be entered:
 
 # to run:
-# ./droplet_setup.sh
+# ./mlSetup.sh
 
 # Update sudo apt-get
 sudo apt-get update
