@@ -40,7 +40,7 @@ epochs = 250
 lrate = 0.01
 decay = lrate/epochs
 
-model = load_model('my_model.h5')
+model = load_model('cifar10_model.h5')
 
 """
 model = Sequential()
