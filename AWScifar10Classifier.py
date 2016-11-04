@@ -14,18 +14,18 @@ from keras.optimizers import SGD
 from keras.layers.convolutional import Convolution2D
 from keras.layers.convolutional import MaxPooling2D
 from keras.utils import np_utils
-# load data
 
+
+# load data
 df = cifar10.load_data()
 
 seed = 7
 numpy.random.seed(seed)
-#df.to_pickle("cifar10.txt")
 
 (X_train, y_train), (X_test, y_test) = df
 
 
-# normalize inputs from 0-255 to 0.0-1.0
+# normalize inputs 
 X_train = X_train.astype('float32')
 X_test = X_test.astype('float32')
 X_train = X_train / 255.0
@@ -40,9 +40,9 @@ epochs = 250
 lrate = 0.01
 decay = lrate/epochs
 
-model = load_model('cifar10_model.h5')
+#model = load_model('cifar10_model.h5')
 
-"""
+# create model
 model = Sequential()
 model.add(Convolution2D(32, 3, 3, input_shape=(3, 32, 32), activation='relu', border_mode='same'))
 model.add(Dropout(0.2))
@@ -63,10 +63,11 @@ model.add(Dropout(0.2))
 model.add(Dense(512, activation='relu', W_constraint=maxnorm(3)))
 model.add(Dropout(0.2))
 model.add(Dense(num_classes, activation='softmax'))
+
 # Compile model
 sgd = SGD(lr=lrate, momentum=0.9, decay=decay, nesterov=False)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
-"""
+
 print(model.summary())
 
 # Fit the model
@@ -76,6 +77,7 @@ model.fit(X_train, y_train, validation_data=(X_test, y_test), nb_epoch=epochs, b
 scores = model.evaluate(X_test, y_test, verbose=0)
 print("Accuracy: %.2f%%" % (scores[1]*100))
 
+# save model
 model.save('cifar10_model.h5')  # creates a HDF5 file 'my_model.h5'
 del model  # deletes the existing model
 
